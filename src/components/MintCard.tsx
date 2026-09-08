@@ -694,7 +694,8 @@ export function MintCard() {
                     : "Not scheduled"}
               </p>
 
-              <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
+              <div className="mt-auto flex flex-wrap items-center justify-between gap-4 pt-5">
+
                 <div className="flex items-center gap-2 rounded-full border border-[var(--mint-border)] bg-[var(--mint-muted)] p-1">
                   <button
                     aria-label="Decrease public mint quantity"
