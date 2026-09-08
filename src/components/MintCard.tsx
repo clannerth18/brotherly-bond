@@ -374,30 +374,30 @@ export function MintCard() {
     <div
       id="mint"
       style={mintStyle}
-      className="scroll-mt-24 rounded-[2.5rem] border border-[var(--mint-border)] bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-5 shadow-2xl md:p-8"
+      className="scroll-mt-24 rounded-[2rem] border border-[var(--mint-border)] bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4 shadow-xl md:p-6"
     >
-      <div className="mb-6 grid items-end gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+      <div className="mb-4 grid items-end gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
         <div>
-          <p className="font-sans text-sm font-medium text-[var(--mint-text-muted)]">
+          <p className="font-sans text-xs font-medium text-[var(--mint-text-muted)]">
             Common rarity to start · Base Mainnet
           </p>
-          <h3 className="mt-1 font-sans text-2xl font-bold tracking-tight text-[var(--mint-text)] md:text-3xl">
+          <h3 className="mt-1 font-sans text-xl font-bold tracking-tight text-[var(--mint-text)] md:text-2xl">
             Mint a champion
           </h3>
-          <span className="mt-3 block h-1 w-16 rounded-full bg-gradient-to-r from-blue-600 to-violet-600" />
+          <span className="mt-2 block h-1 w-12 rounded-full bg-gradient-to-r from-blue-600 to-violet-600" />
         </div>
-        <div className="w-full rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm">
+        <div className="w-full rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-surface)] p-4 shadow-sm">
           <div className="flex items-center justify-between gap-4">
-            <p className="font-mono text-[12px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
+            <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
               Items minted
             </p>
-            <p className="font-mono text-base font-bold text-[var(--mint-text)]">
+            <p className="font-mono text-sm font-bold text-[var(--mint-text)]">
               {isLoading || !mintStatus
                 ? "…"
                 : `${mintStatus.totalMinted} / ${mintStatus.supplyCap}`}
             </p>
           </div>
-          <div className="mt-3 h-3.5 w-full overflow-hidden rounded-full bg-[var(--mint-muted)]">
+          <div className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-[var(--mint-muted)]">
             <div
               className="h-full rounded-full bg-gradient-to-r from-blue-600 to-violet-600 transition-all duration-700"
               style={{ width: `${Math.min(progress, 100)}%` }}
@@ -406,10 +406,10 @@ export function MintCard() {
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
         {/* Left: pass-card carousel */}
-        <div className="relative flex flex-col gap-4 lg:sticky lg:top-8 lg:self-start">
-          <div className="relative aspect-square w-full overflow-hidden rounded-[2rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] shadow-xl">
+        <div className="relative flex flex-col gap-3 lg:sticky lg:top-6 lg:self-start">
+          <div className="relative mx-auto aspect-square w-full max-w-[340px] overflow-hidden rounded-[1.5rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] shadow-xl">
             {PASS_CARD_IMAGES.map((pass, i) => (
               <img
                 key={pass.label}
@@ -456,12 +456,12 @@ export function MintCard() {
         </div>
 
         {/* Right: mint controls */}
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-4">
           {/* Mint actions — whitelist + public stacked full-width */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
 
           {/* Whitelist — always visible. Three states: not connected, eligible, not eligible. */}
-          <div className="flex flex-col gap-4 rounded-[2rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm md:p-6">
+          <div className="flex flex-col gap-3 rounded-[1.5rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] p-4 shadow-sm md:p-5">
             {!address ? (
               <div className="flex flex-col items-start gap-3">
                 <span className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-[var(--mint-border)] bg-[var(--mint-muted)] px-4 py-1.5 font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
