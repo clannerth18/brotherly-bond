@@ -499,16 +499,13 @@ export function MintCard() {
                         }`}
                       />
                       <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text)]">
-                        {whitelistActive ? "Minting now" : "Not started"}
+                        {whitelistActive
+                          ? "Minting now"
+                          : whitelistCountdown
+                            ? `Starts in ${whitelistCountdown}`
+                            : "Not scheduled"}
                       </span>
                     </div>
-                    {!whitelistActive && (
-                      <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
-                        {whitelistCountdown
-                          ? `Starts in ${whitelistCountdown}`
-                          : "Not scheduled"}
-                      </p>
-                    )}
                   </div>
                 </div>
 
@@ -527,7 +524,11 @@ export function MintCard() {
                         onClick={() => void handleVoucherMint([priorityVoucher])}
                         className="rounded-full bg-white px-6 py-2.5 font-mono text-[12px] font-bold uppercase tracking-widest text-[var(--mint-text)] shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 active:scale-[0.98] disabled:opacity-40 disabled:hover:transform-none"
                       >
-                        {!whitelistActive ? "Not started" : status ?? "Mint"}
+                        {!whitelistActive
+                          ? whitelistCountdown
+                            ? `Starts in ${whitelistCountdown}`
+                            : "Not scheduled"
+                          : status ?? "Mint"}
                       </button>
                     </div>
                   </div>
@@ -594,7 +595,7 @@ export function MintCard() {
                   {!whitelistActive
                     ? whitelistCountdown
                       ? `Starts in ${whitelistCountdown}`
-                      : "Not started"
+                      : "Not scheduled"
                     : selectedVouchers.length === 0
                       ? "Select vouchers to mint"
                       : status ??
@@ -674,21 +675,15 @@ export function MintCard() {
                     }`}
                   />
                   <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text)]">
-                    {started ? "Minting now" : "Not started"}
+                    {started
+                      ? "Minting now"
+                      : countdown
+                        ? `Starts in ${countdown}`
+                        : "Not scheduled"}
                   </span>
                 </div>
               </div>
 
-              <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
-
-                <p className="font-mono text-[12px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
-                  {started
-                    ? "Minting now"
-                    : countdown
-                      ? `Starts in ${countdown}`
-                      : "Not scheduled"}
-                </p>
-              </div>
 
               <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-2 rounded-full border border-[var(--mint-border)] bg-[var(--mint-muted)] p-1">
