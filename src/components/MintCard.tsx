@@ -376,7 +376,7 @@ export function MintCard() {
       style={mintStyle}
       className="scroll-mt-24 rounded-[2.5rem] border border-[var(--mint-border)] bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-6 shadow-2xl md:p-10"
     >
-      <div className="grid gap-8 lg:grid-cols-2">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
         {/* Left: pass-card carousel */}
         <div className="relative flex flex-col gap-4 lg:sticky lg:top-8 lg:self-start">
           <div className="relative aspect-square w-full overflow-hidden rounded-[2rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] shadow-xl">
@@ -457,7 +457,8 @@ export function MintCard() {
             </div>
           </div>
 
-          {/* Mint actions */}
+          {/* Mint actions — whitelist + public side by side on wide screens */}
+          <div className="grid gap-4 xl:grid-cols-2">
           {/* Whitelist — always visible. Three states: not connected, eligible, not eligible. */}
           <div className="flex flex-col gap-4 rounded-[2rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm md:p-6">
             {!address ? (
@@ -744,6 +745,7 @@ export function MintCard() {
               </p>
             </div>
           )}
+          </div>
 
           {mintedId !== null && (
             <p className="font-mono text-xs font-bold text-[var(--mint-text-muted)]">
