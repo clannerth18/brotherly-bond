@@ -139,6 +139,7 @@ export function PredictGame({
         complete.signature,
       );
       await tx.wait();
+      await onPrewarm?.(expectedStateAfterGame(nft, complete.won));
       await waitForTokenStateChange(nft.tokenId, before);
       await refreshAll();
       toast.success(complete.won ? "Tier up confirmed" : "Result recorded on-chain");
