@@ -290,7 +290,7 @@ export function NftCard({ nft, compact = false }: { nft: OwnedNft; compact?: boo
       </div>
       )}
 
-      {!compact && isMaxTier(nft) && <PredictGame nft={nft} />}
+      {!compact && isMaxTier(nft) && <PredictGame nft={nft} onPrewarm={prewarm} />}
 
       {!compact && (
       <div className="space-y-2 border-t border-black/10 pt-4">
