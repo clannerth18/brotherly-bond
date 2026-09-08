@@ -376,7 +376,7 @@ export function MintCard() {
       style={mintStyle}
       className="scroll-mt-24 rounded-[2.5rem] border border-[var(--mint-border)] bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-5 shadow-2xl md:p-8"
     >
-      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <div className="mb-6 grid items-end gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
         <div>
           <p className="font-sans text-sm font-medium text-[var(--mint-text-muted)]">
             Common rarity to start · Base Mainnet
@@ -386,7 +386,7 @@ export function MintCard() {
           </h3>
           <span className="mt-3 block h-1 w-16 rounded-full bg-gradient-to-r from-blue-600 to-violet-600" />
         </div>
-        <div className="w-full max-w-lg rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm sm:w-[26rem]">
+        <div className="w-full rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm">
           <div className="flex items-center justify-between gap-4">
             <p className="font-mono text-[12px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
               Items minted
