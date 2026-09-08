@@ -437,16 +437,6 @@ export function MintCard() {
 
         {/* Right: mint controls */}
         <div className="flex flex-col gap-6">
-          <div>
-            <h3 className="font-sans text-2xl font-bold tracking-tight text-[var(--mint-text)] md:text-3xl">
-              Mint a champion
-            </h3>
-            <span className="mt-3 block h-1 w-16 rounded-full bg-gradient-to-r from-blue-600 to-violet-600" />
-            <p className="mt-4 font-sans text-sm font-medium text-[var(--mint-text-muted)]">
-              Common rarity to start · Base Mainnet
-            </p>
-          </div>
-
           {/* Progress */}
           <div className="rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm">
             <div className="flex items-center justify-between">
