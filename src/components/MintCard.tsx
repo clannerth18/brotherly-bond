@@ -508,11 +508,11 @@ export function MintCard() {
                       USDC
                     </p>
                     <button
-                      disabled={!correctNetwork || busy}
+                      disabled={!correctNetwork || busy || !whitelistActive}
                       onClick={() => void handleVoucherMint([priorityVoucher])}
                       className="rounded-full bg-white px-6 py-2.5 font-mono text-[12px] font-bold uppercase tracking-widest text-[var(--mint-text)] shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 active:scale-[0.98] disabled:opacity-40 disabled:hover:transform-none"
                     >
-                      {status ?? "Mint"}
+                      {!whitelistActive ? "Not started" : status ?? "Mint"}
                     </button>
                   </div>
                 </div>
