@@ -111,6 +111,19 @@ export function MintCard() {
       ? (mintStatus.totalMinted / mintStatus.supplyCap) * 100
       : 0;
 
+  const whitelistActive = voucherData?.whitelistActive !== false;
+  const whitelistStartRaw = Number(voucherData?.whitelistStart ?? 0);
+  const whitelistStartMs =
+    whitelistStartRaw > 0
+      ? whitelistStartRaw > 1e12
+        ? whitelistStartRaw
+        : whitelistStartRaw * 1000
+      : 0;
+  const whitelistCountdown =
+    !whitelistActive && whitelistStartMs > 0
+      ? formatCountdown(whitelistStartMs - now)
+      : null;
+
   const priorityVouchers = (voucherData?.vouchers ?? []).filter(
     (v) => v.category.toUpperCase() === "PRIORITY",
   );
