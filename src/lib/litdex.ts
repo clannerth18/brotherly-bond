@@ -214,6 +214,9 @@ export type VoucherResponse = {
   wallet: string;
   totalVouchers: number;
   vouchers: Voucher[];
+  whitelistActive?: boolean;
+  /** Unix seconds (or ms) when the whitelist window opens. */
+  whitelistStart?: number | string;
 };
 
 export function voucherCategoryId(category: string): number {
