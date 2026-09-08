@@ -144,8 +144,11 @@ function writeOwnedCache(address: string, nfts: OwnedNft[]) {
 type ChampionsApiItem = {
   tokenId?: string | number;
   token_id?: string | number;
-  rarity?: number;
-  level?: number;
+  rarity?: number | string;
+  rarityName?: string;
+  rarity_name?: string;
+  tier?: number | string;
+  level?: number | string;
   damaged?: boolean;
   gamesAtMaxLevel?: number;
   games_at_max_level?: number;
