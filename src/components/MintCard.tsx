@@ -543,39 +543,41 @@ export function MintCard() {
                     return (
                       <div
                         key={category}
-                        className="flex flex-col gap-3 rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-muted)] p-4 transition-shadow duration-300 hover:shadow-sm"
+                        className="rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-muted)] p-4 transition-shadow duration-300 hover:shadow-sm"
                       >
-                        <div className="min-w-0">
-                          <p className="truncate font-mono text-sm font-bold uppercase tracking-widest text-[var(--mint-text)]">
-                            {category} x {vouchers.length}
-                          </p>
-                          <p className="mt-1 font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-primary)]">
-                            {discountLabel(first.discountBps)} off
-                            {price !== null
-                              ? ` · $${formatUsdt(discountedPrice(price, first.discountBps))} USDC`
-                              : ""}
-                          </p>
-                        </div>
-                        <div className="flex items-center justify-center gap-2 self-center rounded-full border border-[var(--mint-border)] bg-[var(--mint-surface)] p-1">
-                          <button
-                            aria-label={`Decrease ${category} quantity`}
-                            disabled={qty <= 0 || busy}
-                            onClick={() => setQty(category, qty - 1, vouchers.length)}
-                            className="grid size-8 place-items-center rounded-full text-[var(--mint-text)] transition-all hover:bg-[var(--mint-muted)] hover:text-[var(--mint-primary)] active:scale-90 disabled:opacity-40"
-                          >
-                            <Minus className="size-3.5" />
-                          </button>
-                          <span className="min-w-6 text-center font-mono text-sm font-bold text-[var(--mint-text)]">
-                            {qty}
-                          </span>
-                          <button
-                            aria-label={`Increase ${category} quantity`}
-                            disabled={qty >= vouchers.length || busy}
-                            onClick={() => setQty(category, qty + 1, vouchers.length)}
-                            className="grid size-8 place-items-center rounded-full text-[var(--mint-text)] transition-all hover:bg-[var(--mint-muted)] hover:text-[var(--mint-primary)] active:scale-90 disabled:opacity-40"
-                          >
-                            <Plus className="size-3.5" />
-                          </button>
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="min-w-0">
+                            <p className="truncate font-mono text-sm font-bold uppercase tracking-widest text-[var(--mint-text)]">
+                              {category} x {vouchers.length}
+                            </p>
+                            <p className="mt-1 font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-primary)]">
+                              {discountLabel(first.discountBps)} off
+                              {price !== null
+                                ? ` · $${formatUsdt(discountedPrice(price, first.discountBps))} USDC`
+                                : ""}
+                            </p>
+                          </div>
+                          <div className="flex shrink-0 items-center gap-1 rounded-full border border-[var(--mint-border)] bg-[var(--mint-surface)] p-1">
+                            <button
+                              aria-label={`Decrease ${category} quantity`}
+                              disabled={qty <= 0 || busy}
+                              onClick={() => setQty(category, qty - 1, vouchers.length)}
+                              className="grid size-7 place-items-center rounded-full text-[var(--mint-text)] transition-all hover:bg-[var(--mint-muted)] hover:text-[var(--mint-primary)] active:scale-90 disabled:opacity-40"
+                            >
+                              <Minus className="size-3" />
+                            </button>
+                            <span className="min-w-5 text-center font-mono text-xs font-bold text-[var(--mint-text)]">
+                              {qty}
+                            </span>
+                            <button
+                              aria-label={`Increase ${category} quantity`}
+                              disabled={qty >= vouchers.length || busy}
+                              onClick={() => setQty(category, qty + 1, vouchers.length)}
+                              className="grid size-7 place-items-center rounded-full text-[var(--mint-text)] transition-all hover:bg-[var(--mint-muted)] hover:text-[var(--mint-primary)] active:scale-90 disabled:opacity-40"
+                            >
+                              <Plus className="size-3" />
+                            </button>
+                          </div>
                         </div>
                       </div>
                     );
