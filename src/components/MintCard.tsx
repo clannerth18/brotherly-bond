@@ -61,7 +61,7 @@ const mintStyle = {
 export function MintCard() {
   const { address, getSigner, correctNetwork, connect, connecting } = useWallet();
   const { data: mintStatus, isLoading, refetch: refetchStatus } = useMintStatus();
-  const { data: voucherData, refetch: refetchVouchers } = useVouchers();
+  const { data: voucherData, isLoading: vouchersLoading, refetch: refetchVouchers } = useVouchers();
   const refreshAll = useRefreshAll();
   const [status, setStatus] = useState<string | null>(null);
   const [mintedId, setMintedId] = useState<bigint | null>(null);
