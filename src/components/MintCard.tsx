@@ -376,7 +376,7 @@ export function MintCard() {
       style={mintStyle}
       className="scroll-mt-24 rounded-[2.5rem] border border-[var(--mint-border)] bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-5 shadow-2xl md:p-8"
     >
-      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <div className="mb-6 grid items-end gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
         <div>
           <p className="font-sans text-sm font-medium text-[var(--mint-text-muted)]">
             Common rarity to start · Base Mainnet
