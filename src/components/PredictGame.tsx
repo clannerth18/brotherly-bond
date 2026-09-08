@@ -17,6 +17,16 @@ const COOLDOWN_SECONDS = 12;
 
 type Phase = "idle" | "playing" | "cooldown" | "settling" | "done";
 
+/** Rarity/level a token lands on after a game settles on-chain. */
+export function expectedStateAfterGame(
+  nft: { rarity: number; level: number },
+  won: boolean,
+): { rarity: number; level: number } {
+  if (!won) return { rarity: nft.rarity, level: Math.max(1, nft.level - 1) };
+  if (!isMaxTier(nft)) return { rarity: nft.rarity, level: nft.level + 1 };
+  return { rarity: Math.min(nft.rarity + 1, 3), level: 1 };
+}
+
 export function PredictGame({
   nft,
   onPrewarm,
