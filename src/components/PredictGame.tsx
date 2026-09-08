@@ -17,7 +17,13 @@ const COOLDOWN_SECONDS = 12;
 
 type Phase = "idle" | "playing" | "cooldown" | "settling" | "done";
 
-export function PredictGame({ nft }: { nft: OwnedNft }) {
+export function PredictGame({
+  nft,
+  onPrewarm,
+}: {
+  nft: OwnedNft;
+  onPrewarm?: (expected: { rarity: number; level: number }) => Promise<void>;
+}) {
   const { address, getSigner, correctNetwork } = useWallet();
   const refreshAll = useRefreshAll();
 
