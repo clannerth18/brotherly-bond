@@ -193,7 +193,12 @@ export function NftCard({ nft, compact = false }: { nft: OwnedNft; compact?: boo
   return (
     <div className="flex flex-col gap-4 rounded-[2rem] border border-[#0038FF]/15 bg-[#0038FF]/5 p-6 shadow-xl backdrop-blur-md">
 
-      {artLoading ? (
+      {updating ? (
+        <div className="flex aspect-square w-full flex-col items-center justify-center gap-3 rounded-3xl border-[3px] border-white bg-black/5">
+          <Spinner className="size-8 text-[#0038FF]" />
+          <p className="btn-text text-black/60">Updating…</p>
+        </div>
+      ) : artLoading ? (
         <div className="flex aspect-square w-full items-center justify-center rounded-3xl border-[3px] border-white bg-black/5">
           <Spinner className="size-8 text-[#0038FF]" />
         </div>
