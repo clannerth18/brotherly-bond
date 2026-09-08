@@ -458,7 +458,7 @@ export function MintCard() {
         {/* Right: mint controls */}
         <div className="flex flex-col gap-5">
           {/* Mint actions — whitelist + public side by side on wide screens */}
-          <div className="grid gap-4 xl:grid-cols-2">
+          <div className="grid items-start gap-4 xl:grid-cols-2">
           {/* Whitelist — always visible. Three states: not connected, eligible, not eligible. */}
           <div className="flex flex-col gap-4 rounded-[2rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm md:p-6">
             {!address ? (
@@ -684,8 +684,15 @@ export function MintCard() {
                 </div>
               </div>
 
+              <p className="mt-4 font-mono text-[12px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
+                {started
+                  ? "Minting now"
+                  : countdown
+                    ? `Starts in ${countdown}`
+                    : "Not scheduled"}
+              </p>
 
-              <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+              <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-2 rounded-full border border-[var(--mint-border)] bg-[var(--mint-muted)] p-1">
                   <button
                     aria-label="Decrease public mint quantity"
