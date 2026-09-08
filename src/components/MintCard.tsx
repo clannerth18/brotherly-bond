@@ -386,18 +386,18 @@ export function MintCard() {
           </h3>
           <span className="mt-3 block h-1 w-16 rounded-full bg-gradient-to-r from-blue-600 to-violet-600" />
         </div>
-        <div className="w-full max-w-xs rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-surface)] p-4 shadow-sm sm:w-72">
+        <div className="w-full max-w-lg rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm sm:w-[26rem]">
           <div className="flex items-center justify-between gap-4">
-            <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
+            <p className="font-mono text-[12px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
               Items minted
             </p>
-            <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text)]">
+            <p className="font-mono text-base font-bold text-[var(--mint-text)]">
               {isLoading || !mintStatus
                 ? "…"
                 : `${mintStatus.totalMinted} / ${mintStatus.supplyCap}`}
             </p>
           </div>
-          <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-[var(--mint-muted)]">
+          <div className="mt-3 h-3.5 w-full overflow-hidden rounded-full bg-[var(--mint-muted)]">
             <div
               className="h-full rounded-full bg-gradient-to-r from-blue-600 to-violet-600 transition-all duration-700"
               style={{ width: `${Math.min(progress, 100)}%` }}
