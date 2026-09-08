@@ -128,6 +128,14 @@ export function MintCard() {
     (v) => v.category.toUpperCase() === "PRIORITY",
   );
   const priorityVoucher = priorityVouchers[0] ?? null;
+  const RARITY_DISPLAY: Record<string, string> = {
+    COMMON: "LitShard",
+    RARE: "LitCore",
+    EPIC: "LitGod",
+  };
+  const rarityLabel = (category: string) =>
+    RARITY_DISPLAY[category.toUpperCase()] ?? category;
+
   const voucherGroups = (() => {
     const map = new Map<string, Voucher[]>();
     for (const v of voucherData?.vouchers ?? []) {
