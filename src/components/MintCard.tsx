@@ -374,19 +374,39 @@ export function MintCard() {
     <div
       id="mint"
       style={mintStyle}
-      className="scroll-mt-24 rounded-[2.5rem] border border-[var(--mint-border)] bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-6 shadow-2xl md:p-10"
+      className="scroll-mt-24 rounded-[2.5rem] border border-[var(--mint-border)] bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-5 shadow-2xl md:p-8"
     >
-      <div className="mb-8">
-        <h3 className="font-sans text-2xl font-bold tracking-tight text-[var(--mint-text)] md:text-3xl">
-          Mint a champion
-        </h3>
-        <span className="mt-3 block h-1 w-16 rounded-full bg-gradient-to-r from-blue-600 to-violet-600" />
-        <p className="mt-4 font-sans text-sm font-medium text-[var(--mint-text-muted)]">
-          Common rarity to start · Base Mainnet
-        </p>
+      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="font-sans text-sm font-medium text-[var(--mint-text-muted)]">
+            Common rarity to start · Base Mainnet
+          </p>
+          <h3 className="mt-1 font-sans text-2xl font-bold tracking-tight text-[var(--mint-text)] md:text-3xl">
+            Mint a champion
+          </h3>
+          <span className="mt-3 block h-1 w-16 rounded-full bg-gradient-to-r from-blue-600 to-violet-600" />
+        </div>
+        <div className="w-full max-w-xs rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-surface)] p-4 shadow-sm sm:w-72">
+          <div className="flex items-center justify-between gap-4">
+            <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
+              Items minted
+            </p>
+            <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text)]">
+              {isLoading || !mintStatus
+                ? "…"
+                : `${mintStatus.totalMinted} / ${mintStatus.supplyCap}`}
+            </p>
+          </div>
+          <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-[var(--mint-muted)]">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-blue-600 to-violet-600 transition-all duration-700"
+              style={{ width: `${Math.min(progress, 100)}%` }}
+            />
+          </div>
+        </div>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
         {/* Left: pass-card carousel */}
         <div className="relative flex flex-col gap-4 lg:sticky lg:top-8 lg:self-start">
           <div className="relative aspect-square w-full overflow-hidden rounded-[2rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] shadow-xl">
@@ -436,27 +456,7 @@ export function MintCard() {
         </div>
 
         {/* Right: mint controls */}
-        <div className="flex flex-col gap-6">
-          {/* Progress */}
-          <div className="rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm">
-            <div className="flex items-center justify-between">
-              <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
-                Items minted
-              </p>
-              <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text)]">
-                {isLoading || !mintStatus
-                  ? "…"
-                  : `${mintStatus.totalMinted} / ${mintStatus.supplyCap}`}
-              </p>
-            </div>
-            <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-[var(--mint-muted)]">
-              <div
-                className="h-full rounded-full bg-gradient-to-r from-blue-600 to-violet-600 transition-all duration-700"
-                style={{ width: `${Math.min(progress, 100)}%` }}
-              />
-            </div>
-          </div>
-
+        <div className="flex flex-col gap-5">
           {/* Mint actions — whitelist + public side by side on wide screens */}
           <div className="grid gap-4 xl:grid-cols-2">
           {/* Whitelist — always visible. Three states: not connected, eligible, not eligible. */}
