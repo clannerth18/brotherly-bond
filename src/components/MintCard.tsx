@@ -13,6 +13,9 @@ import {
 } from "@/hooks/useLitdex";
 import { useWallet } from "@/hooks/useWallet";
 import { PASS_CARD_IMAGES } from "@/lib/images";
+import litCoreIcon from "@/assets/rarity-icons/LitCore.png.asset.json";
+import litGodIcon from "@/assets/rarity-icons/LitGod.png.asset.json";
+import litShardIcon from "@/assets/rarity-icons/LitShard.png.asset.json";
 import {
   NFT_ADDRESS,
   discountLabel,
@@ -132,6 +135,11 @@ export function MintCard() {
     COMMON: "LitShard",
     RARE: "LitCore",
     EPIC: "LitGod",
+  };
+  const RARITY_ICONS: Record<string, string> = {
+    COMMON: litShardIcon.url,
+    RARE: litCoreIcon.url,
+    EPIC: litGodIcon.url,
   };
   const rarityLabel = (category: string) =>
     RARITY_DISPLAY[category.toUpperCase()] ?? category;
@@ -551,7 +559,7 @@ export function MintCard() {
                     return (
                       <div
                         key={category}
-                        className="relative overflow-hidden rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-muted)] p-3 transition-shadow duration-300 hover:shadow-sm"
+                        className="relative min-h-[104px] overflow-hidden rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-muted)] p-3 transition-shadow duration-300 hover:shadow-sm"
                       >
                         {/* Diagonal corner discount ribbon — matches the whitelist-eligible gradient */}
                         <div className="pointer-events-none absolute left-0 top-0 size-[60px] overflow-hidden rounded-tl-2xl">
@@ -561,10 +569,22 @@ export function MintCard() {
                           </span>
                         </div>
 
-                        <div className="flex min-h-[68px] items-center justify-between gap-2 pl-9">
-                          <p className="whitespace-nowrap font-mono text-xs font-bold uppercase tracking-widest text-[var(--mint-text)]">
-                            {rarityLabel(category)} x {vouchers.length}
-                          </p>
+                        <span className="absolute right-3 top-3 whitespace-nowrap font-mono text-[11px] font-bold tracking-widest text-[var(--mint-text)]">
+                          x {vouchers.length}
+                        </span>
+
+                        <div className="flex min-h-[78px] items-end justify-between gap-2 pl-8 pt-7">
+                          <div className="flex min-w-0 items-center gap-2 self-center">
+                            <img
+                              src={RARITY_ICONS[category.toUpperCase()]}
+                              alt=""
+                              aria-hidden="true"
+                              className="size-8 shrink-0 object-contain"
+                            />
+                            <p className="min-w-0 whitespace-nowrap font-mono text-[11px] font-bold tracking-wider text-[var(--mint-text)]">
+                              {rarityLabel(category)}
+                            </p>
+                          </div>
                           <div className="flex shrink-0 items-center gap-1 rounded-full border border-[var(--mint-border)] bg-[var(--mint-surface)] p-0.5">
                             <button
                               aria-label={`Decrease ${category} quantity`}
