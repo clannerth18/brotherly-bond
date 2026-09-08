@@ -456,27 +456,7 @@ export function MintCard() {
         </div>
 
         {/* Right: mint controls */}
-        <div className="flex flex-col gap-6">
-          {/* Progress */}
-          <div className="rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm">
-            <div className="flex items-center justify-between">
-              <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
-                Items minted
-              </p>
-              <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text)]">
-                {isLoading || !mintStatus
-                  ? "…"
-                  : `${mintStatus.totalMinted} / ${mintStatus.supplyCap}`}
-              </p>
-            </div>
-            <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-[var(--mint-muted)]">
-              <div
-                className="h-full rounded-full bg-gradient-to-r from-blue-600 to-violet-600 transition-all duration-700"
-                style={{ width: `${Math.min(progress, 100)}%` }}
-              />
-            </div>
-          </div>
-
+        <div className="flex flex-col gap-5">
           {/* Mint actions — whitelist + public side by side on wide screens */}
           <div className="grid gap-4 xl:grid-cols-2">
           {/* Whitelist — always visible. Three states: not connected, eligible, not eligible. */}
