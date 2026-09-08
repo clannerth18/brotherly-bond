@@ -186,15 +186,13 @@ export function MintCard() {
       setStatus("Minting…");
       const nft = nftContract(signer);
       const tx = await nft.mintBatch(quantity);
-      await tx.wait(1);
+      const receipt = await tx.wait(1);
+
+      setStatus("Preparing artwork…");
+      const newIds = await prewarmMintedTokens(receipt);
+      if (newIds.length > 0) setMintedId(newIds[newIds.length - 1]!);
 
       setStatus("Success");
-      try {
-        const next = await nftRead().nextTokenId();
-        if (next > 1n) setMintedId(next - 1n);
-      } catch {
-        // artwork is optional
-      }
       await refreshAll();
       await refetchStatus();
       toast.success(
