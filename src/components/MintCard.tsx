@@ -659,8 +659,8 @@ export function MintCard() {
 
           {/* Public stage */}
           {address && (
-            <div className="flex h-full flex-col rounded-[2rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm md:p-6">
-
+            <div className="rounded-[2rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm md:p-6">
+              {/* Header row: label + price (left, stacked), status badge (far right) */}
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div className="space-y-1">
                   <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
@@ -677,15 +677,12 @@ export function MintCard() {
                     }`}
                   />
                   <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text)]">
-                    {started
-                      ? "Minting now"
-                      : countdown
-                        ? `Starts in ${countdown}`
-                        : "Not scheduled"}
+                    {started ? "Minting now" : "Not started"}
                   </span>
                 </div>
               </div>
 
+              {/* Plain text countdown line */}
               <p className="mt-4 font-mono text-[12px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
                 {started
                   ? "Minting now"
@@ -694,8 +691,8 @@ export function MintCard() {
                     : "Not scheduled"}
               </p>
 
-              <div className="mt-auto flex flex-wrap items-center justify-between gap-4 pt-5">
-
+              {/* Stepper + mint button row, immediately after the countdown */}
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-2 rounded-full border border-[var(--mint-border)] bg-[var(--mint-muted)] p-1">
                   <button
                     aria-label="Decrease public mint quantity"
@@ -745,7 +742,7 @@ export function MintCard() {
                 </button>
               </div>
 
-              <p className="mt-5 text-right font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
+              <p className="mt-4 text-right font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
                 Limit {WALLET_LIMIT} per wallet · You own {ownedCount}
               </p>
             </div>
