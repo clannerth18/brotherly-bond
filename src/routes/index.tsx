@@ -39,8 +39,8 @@ function Dashboard() {
     <div className="min-h-screen bg-[#0038FF]">
       <Hero onMintClick={scrollToMint} />
 
-      <section className="relative z-20 -mt-10 rounded-t-[2.5rem] bg-white px-4 py-16 md:rounded-t-[4rem]">
-        <div className="mx-auto max-w-6xl">
+      <section className="relative z-20 -mt-10 rounded-t-[2.5rem] bg-white px-6 py-16 md:rounded-t-[4rem] md:px-12 lg:px-16">
+        <div className="mx-auto w-full max-w-[1600px]">
           {!address ? (
             <MintCard />
           ) : (
