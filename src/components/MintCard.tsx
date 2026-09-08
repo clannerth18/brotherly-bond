@@ -563,7 +563,7 @@ export function MintCard() {
 
                         <div className="flex min-h-[68px] items-center justify-between gap-2 pl-9">
                           <p className="whitespace-nowrap font-mono text-xs font-bold uppercase tracking-widest text-[var(--mint-text)]">
-                            {category} x {vouchers.length}
+                            {rarityLabel(category)} x {vouchers.length}
                           </p>
                           <div className="flex shrink-0 items-center gap-1 rounded-full border border-[var(--mint-border)] bg-[var(--mint-surface)] p-0.5">
                             <button
