@@ -623,7 +623,7 @@ export function MintCard() {
 
           {/* Not connected */}
           {!address && (
-            <div className="flex flex-col gap-4">
+            <div className="flex h-full flex-col gap-4">
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm transition-shadow duration-300 hover:shadow-md">
                   <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
