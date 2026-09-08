@@ -624,17 +624,17 @@ export function MintCard() {
           {/* Not connected */}
           {!address && (
             <div className="flex flex-col gap-4">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm transition-shadow duration-300 hover:shadow-md">
-                  <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
-                    Whitelist mint
-                  </p>
-                  <p className="mt-2 flex items-center gap-2 font-mono text-[12px] font-bold uppercase tracking-widest text-[var(--mint-primary)]">
-                    <span className="inline-block size-2 rounded-full bg-[var(--mint-success)]" />
-                    Open
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm transition-shadow duration-300 hover:shadow-md">
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-surface)] p-4 shadow-sm transition-shadow duration-300 hover:shadow-md">
+                    <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
+                      Whitelist mint
+                    </p>
+                    <p className="mt-1.5 flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-primary)]">
+                      <span className="inline-block size-2 rounded-full bg-[var(--mint-success)]" />
+                      Open
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-surface)] p-4 shadow-sm transition-shadow duration-300 hover:shadow-md">
                   <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
                     Public mint
                   </p>
@@ -650,7 +650,7 @@ export function MintCard() {
               <button
                 onClick={() => void connect()}
                 disabled={connecting}
-                className="w-full rounded-full bg-gradient-to-r from-blue-600 to-violet-600 px-6 py-3.5 font-mono text-[13px] font-bold uppercase tracking-widest text-white shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/25 active:translate-y-0 active:scale-[0.98] disabled:opacity-40 disabled:hover:transform-none"
+                className="w-full rounded-full bg-gradient-to-r from-blue-600 to-violet-600 px-6 py-2.5 font-mono text-[12px] font-bold uppercase tracking-widest text-white shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/25 active:translate-y-0 active:scale-[0.98] disabled:opacity-40 disabled:hover:transform-none"
               >
                 {connecting ? "Connecting…" : "Connect wallet to mint"}
               </button>
@@ -666,7 +666,7 @@ export function MintCard() {
                   <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
                     Public stage
                   </p>
-                  <p className="font-sans text-2xl font-bold text-[var(--mint-text)]">
+                  <p className="font-sans text-xl font-bold text-[var(--mint-text)]">
                     ${price !== null ? formatUsdt(price) : "…"} USDC
                   </p>
                 </div>
@@ -725,7 +725,7 @@ export function MintCard() {
                     limitReached
                   }
                   onClick={() => void handleMint(publicQtyClamped)}
-                  className="rounded-full bg-gradient-to-r from-blue-600 to-violet-600 px-8 py-3.5 font-mono text-[13px] font-bold uppercase tracking-widest text-white shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/25 active:translate-y-0 active:scale-[0.98] disabled:opacity-40 disabled:hover:transform-none"
+                  className="rounded-full bg-gradient-to-r from-blue-600 to-violet-600 px-7 py-2.5 font-mono text-[12px] font-bold uppercase tracking-widest text-white shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/25 active:translate-y-0 active:scale-[0.98] disabled:opacity-40 disabled:hover:transform-none"
                 >
                   {soldOut
                     ? "Sold out"
