@@ -535,15 +535,15 @@ export function MintCard() {
                   </div>
                 )}
 
-                {/* Category rows */}
-                <div className="flex flex-col gap-3">
+                {/* Category rows — Common / Rare / Epic side-by-side as compact boxes */}
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                   {voucherGroups.map(([category, vouchers]) => {
                     const qty = Math.min(qtyFor(category), vouchers.length);
                     const first = vouchers[0]!;
                     return (
                       <div
                         key={category}
-                        className="flex items-center justify-between gap-4 rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-muted)] p-4 transition-shadow duration-300 hover:shadow-sm"
+                        className="flex flex-col gap-3 rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-muted)] p-4 transition-shadow duration-300 hover:shadow-sm"
                       >
                         <div className="min-w-0">
                           <p className="truncate font-mono text-sm font-bold uppercase tracking-widest text-[var(--mint-text)]">
@@ -556,7 +556,7 @@ export function MintCard() {
                               : ""}
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 rounded-full border border-[var(--mint-border)] bg-[var(--mint-surface)] p-1">
+                        <div className="flex items-center justify-center gap-2 self-center rounded-full border border-[var(--mint-border)] bg-[var(--mint-surface)] p-1">
                           <button
                             aria-label={`Decrease ${category} quantity`}
                             disabled={qty <= 0 || busy}
