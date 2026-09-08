@@ -512,10 +512,10 @@ export function MintCard() {
 
                 {/* Priority voucher */}
                 {priorityVoucher && price !== null && (
-                  <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 to-blue-900 p-5 text-white shadow-md">
-                    <div className="absolute -right-8 -top-8 size-32 rounded-full bg-[var(--mint-primary)]/20 blur-2xl" />
-                    <div className="relative flex flex-wrap items-center justify-between gap-4">
-                      <p className="font-sans text-base font-semibold">
+                  <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 to-blue-900 p-4 text-white shadow-md">
+                    <div className="absolute -right-8 -top-8 size-28 rounded-full bg-[var(--mint-primary)]/20 blur-2xl" />
+                    <div className="relative flex flex-wrap items-center justify-between gap-3">
+                      <p className="font-sans text-sm font-semibold">
                         You are eligible to mint at ${" "}
                         {formatUsdt(discountedPrice(price, priorityVoucher.discountBps))}{" "}
                         USDC
@@ -523,7 +523,7 @@ export function MintCard() {
                       <button
                         disabled={!correctNetwork || busy || !whitelistActive}
                         onClick={() => void handleVoucherMint([priorityVoucher])}
-                        className="rounded-full bg-white px-6 py-2.5 font-mono text-[12px] font-bold uppercase tracking-widest text-[var(--mint-text)] shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 active:scale-[0.98] disabled:opacity-40 disabled:hover:transform-none"
+                        className="rounded-full bg-white px-5 py-2 font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text)] shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 active:scale-[0.98] disabled:opacity-40 disabled:hover:transform-none"
                       >
                         {!whitelistActive
                           ? whitelistCountdown
@@ -543,7 +543,7 @@ export function MintCard() {
                     return (
                       <div
                         key={category}
-                        className="flex items-center justify-between gap-4 rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-muted)] p-4 transition-shadow duration-300 hover:shadow-sm"
+                        className="flex items-center justify-between gap-3 rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-muted)] p-3 transition-shadow duration-300 hover:shadow-sm"
                       >
                         <div className="min-w-0">
                           <p className="truncate font-mono text-sm font-bold uppercase tracking-widest text-[var(--mint-text)]">
@@ -591,7 +591,7 @@ export function MintCard() {
                     selectedVouchers.length === 0
                   }
                   onClick={() => void handleVoucherMint(selectedVouchers)}
-                  className="mt-1 w-full rounded-full bg-gradient-to-r from-blue-600 to-violet-600 px-6 py-3.5 font-mono text-[13px] font-bold uppercase tracking-widest text-white shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/25 active:translate-y-0 active:scale-[0.98] disabled:opacity-40 disabled:hover:transform-none"
+                  className="mt-1 w-full rounded-full bg-gradient-to-r from-blue-600 to-violet-600 px-6 py-2.5 font-mono text-[12px] font-bold uppercase tracking-widest text-white shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/25 active:translate-y-0 active:scale-[0.98] disabled:opacity-40 disabled:hover:transform-none"
                 >
                   {!whitelistActive
                     ? whitelistCountdown
@@ -659,7 +659,7 @@ export function MintCard() {
 
           {/* Public stage */}
           {address && (
-            <div className="rounded-[2rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm md:p-6">
+            <div className="rounded-[1.5rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] p-4 shadow-sm md:p-5">
               {/* Header row: label + price (left, stacked), status badge (far right) */}
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div className="space-y-1">
