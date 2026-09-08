@@ -10,6 +10,7 @@ import {
   CONFIG_REPAIR_COST,
   artworkUrl,
   nftContract,
+  parseRarity,
   pointsContract,
   usdtContract,
   type OwnedNft,
@@ -144,8 +145,11 @@ function writeOwnedCache(address: string, nfts: OwnedNft[]) {
 type ChampionsApiItem = {
   tokenId?: string | number;
   token_id?: string | number;
-  rarity?: number;
-  level?: number;
+  rarity?: number | string;
+  rarityName?: string;
+  rarity_name?: string;
+  tier?: number | string;
+  level?: number | string;
   damaged?: boolean;
   gamesAtMaxLevel?: number;
   games_at_max_level?: number;
@@ -184,16 +188,49 @@ export function useOwnedNfts() {
         if (!Array.isArray(items)) {
           throw new Error("unexpected champions response format");
         }
-        const result: OwnedNft[] = items.map((item) => {
+        const parsed = items.map((item) => {
           const tokenIdRaw = item.tokenId ?? item.token_id ?? "0";
+          const rarity =
+            parseRarity(item.rarity) ??
+            parseRarity(item.rarityName) ??
+            parseRarity(item.rarity_name) ??
+            parseRarity(item.tier);
+          const levelNum = Number(item.level);
           return {
             tokenId: BigInt(tokenIdRaw),
-            rarity: Number(item.rarity ?? 0),
-            level: Number(item.level ?? 0),
+            rarity,
+            level: Number.isFinite(levelNum) && levelNum > 0 ? levelNum : null,
             damaged: Boolean(item.damaged),
             gamesAtMaxLevel: Number(item.gamesAtMaxLevel ?? item.games_at_max_level ?? 0),
           };
         });
+
+        // Anything the API did not report clearly is read straight from chain,
+        // so the card never falls back to "Unknown".
+        const contract = nftRead();
+        const result: OwnedNft[] = await Promise.all(
+          parsed.map(async (item) => {
+            if (item.rarity !== null && item.level !== null) {
+              return { ...item, rarity: item.rarity, level: item.level } as OwnedNft;
+            }
+            try {
+              const s = await contract.tokenState(item.tokenId);
+              return {
+                tokenId: item.tokenId,
+                rarity: Number(s[0]),
+                level: Number(s[1]),
+                damaged: Boolean(s[2]),
+                gamesAtMaxLevel: Number(s[3]),
+              };
+            } catch {
+              return {
+                ...item,
+                rarity: item.rarity ?? 0,
+                level: item.level ?? 1,
+              } as OwnedNft;
+            }
+          }),
+        );
         writeOwnedCache(address, result);
         return result;
       } finally {
