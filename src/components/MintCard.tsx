@@ -546,15 +546,12 @@ export function MintCard() {
                         className="rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-muted)] p-4 transition-shadow duration-300 hover:shadow-sm"
                       >
                         <div className="flex items-start justify-between gap-3">
-                          <div className="min-w-0">
+                          <div className="min-w-0 space-y-2">
+                            <span className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-600 to-violet-600 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-widest text-white shadow-sm">
+                              {discountLabel(first.discountBps)} off
+                            </span>
                             <p className="truncate font-mono text-sm font-bold uppercase tracking-widest text-[var(--mint-text)]">
                               {category} x {vouchers.length}
-                            </p>
-                            <p className="mt-1 font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-primary)]">
-                              {discountLabel(first.discountBps)} off
-                              {price !== null
-                                ? ` · $${formatUsdt(discountedPrice(price, first.discountBps))} USDC`
-                                : ""}
                             </p>
                           </div>
                           <div className="flex shrink-0 items-center gap-1 rounded-full border border-[var(--mint-border)] bg-[var(--mint-surface)] p-1">
