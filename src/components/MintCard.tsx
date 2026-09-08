@@ -543,17 +543,20 @@ export function MintCard() {
                     return (
                       <div
                         key={category}
-                        className="rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-muted)] p-4 transition-shadow duration-300 hover:shadow-sm"
+                        className="relative overflow-hidden rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-muted)] p-4 transition-shadow duration-300 hover:shadow-sm"
                       >
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="min-w-0 space-y-2">
-                            <span className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-600 to-violet-600 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-widest text-white shadow-sm">
-                              {discountLabel(first.discountBps)} off
-                            </span>
-                            <p className="truncate font-mono text-sm font-bold uppercase tracking-widest text-[var(--mint-text)]">
-                              {category} x {vouchers.length}
-                            </p>
-                          </div>
+                        {/* Diagonal corner discount ribbon — matches the whitelist-eligible gradient */}
+                        <div className="pointer-events-none absolute left-0 top-0 h-[78px] w-[78px] overflow-hidden rounded-tl-2xl">
+                          <span className="absolute left-[-55px] top-[26px] block w-[150px] -rotate-45 bg-gradient-to-r from-blue-600 to-violet-600 py-1 text-center font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-white shadow-[0_1px_3px_rgba(0,0,0,0.18)]">
+                            {discountLabel(first.discountBps)}
+                            <span className="block text-[8px] leading-none">off</span>
+                          </span>
+                        </div>
+
+                        <div className="flex min-h-[84px] items-center justify-between gap-3 pl-14">
+                          <p className="truncate font-mono text-sm font-bold uppercase tracking-widest text-[var(--mint-text)]">
+                            {category} x {vouchers.length}
+                          </p>
                           <div className="flex shrink-0 items-center gap-1 rounded-full border border-[var(--mint-border)] bg-[var(--mint-surface)] p-1">
                             <button
                               aria-label={`Decrease ${category} quantity`}
