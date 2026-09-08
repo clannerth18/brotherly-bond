@@ -55,6 +55,62 @@ export function artworkUrl(tokenId: bigint | number | string, version?: string):
   return version ? `${base}?v=${encodeURIComponent(version)}` : base;
 }
 
+/**
+ * Asks the metadata API to generate + cache the artwork for a token BEFORE we
+ * display it. The endpoint retries internally until on-chain state matches the
+ * expected rarity/level, so the follow-up image GET is instant.
+ * Never throws — a failed pre-warm just means the image loads the slow way.
+ */
+export async function prewarmMetadata(
+  tokenId: bigint | number | string,
+  expectedRarity: number | string,
+  expectedLevel: number,
+): Promise<boolean> {
+  const rarityName =
+    typeof expectedRarity === "number"
+      ? RARITY_NAMES[Math.max(0, Math.min(RARITY_NAMES.length - 1, expectedRarity))]!
+      : expectedRarity;
+  try {
+    const res = await fetch(`${API_BASE}/metadata/${tokenId.toString()}/prewarm`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        expectedRarity: rarityName,
+        expectedLevel: Math.max(1, Math.floor(expectedLevel)),
+      }),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+/** Token ids minted in a transaction, read from the ERC-721 mint transfers. */
+export function mintedTokenIdsFromReceipt(
+  receipt: {
+    logs?: readonly { address?: string; topics: readonly string[]; data: string }[];
+  } | null,
+): bigint[] {
+  const iface = new ethers.Interface([
+    "event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)",
+  ]);
+  const ids: bigint[] = [];
+  for (const log of receipt?.logs ?? []) {
+    if (log.address && log.address.toLowerCase() !== NFT_ADDRESS.toLowerCase()) continue;
+    try {
+      const parsed = iface.parseLog({ topics: [...log.topics], data: log.data });
+      if (parsed?.name === "Transfer" && String(parsed.args[0]) === ethers.ZeroAddress) {
+        ids.push(BigInt(parsed.args[2] as bigint));
+      }
+    } catch {
+      /* unrelated log */
+    }
+  }
+  return ids;
+}
+
+
+
 
 export const USDC_ABI = [
   "function approve(address spender, uint256 amount) returns (bool)",

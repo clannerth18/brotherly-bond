@@ -18,8 +18,10 @@ import {
   discountLabel,
   discountedPrice,
   formatUsdt,
+  mintedTokenIdsFromReceipt,
   nftContract,
   parseWalletError,
+  prewarmMetadata,
   usdcContract,
   type Voucher,
 } from "@/lib/litdex";
@@ -147,6 +149,27 @@ export function MintCard() {
   const publicQtyClamped = Math.max(1, Math.min(publicQty, Math.max(remainingPublic, 1)));
 
   /**
+   * Every freshly minted token starts as Common level 1 — pre-warm each one so
+   * the artwork is cached server-side before we render the card.
+   */
+  async function prewarmMintedTokens(
+    receipt: { logs?: readonly { address?: string; topics: readonly string[]; data: string }[] } | null,
+  ) {
+    const ids = mintedTokenIdsFromReceipt(receipt);
+    if (ids.length === 0) {
+      try {
+        const next = await nftRead().nextTokenId();
+        if (next > 1n) ids.push(next - 1n);
+      } catch {
+        /* artwork is optional */
+      }
+    }
+    await Promise.all(ids.map((id) => prewarmMetadata(id, "Common", 1)));
+    return ids;
+  }
+
+
+  /**
    * Ensures the NFT contract can spend `totalCost` USDC.
    * Awaits the approve receipt AND polls the chain until the new allowance is
    * actually readable, so the follow-up mint can never hit a stale allowance.
@@ -186,15 +209,13 @@ export function MintCard() {
       setStatus("Minting…");
       const nft = nftContract(signer);
       const tx = await nft.mintBatch(quantity);
-      await tx.wait(1);
+      const receipt = await tx.wait(1);
+
+      setStatus("Preparing artwork…");
+      const newIds = await prewarmMintedTokens(receipt);
+      if (newIds.length > 0) setMintedId(newIds[newIds.length - 1]!);
 
       setStatus("Success");
-      try {
-        const next = await nftRead().nextTokenId();
-        if (next > 1n) setMintedId(next - 1n);
-      } catch {
-        // artwork is optional
-      }
       await refreshAll();
       await refetchStatus();
       toast.success(
@@ -227,15 +248,13 @@ export function MintCard() {
         vouchers.length === 1
           ? await nft.mintWithVoucher(structs[0]!, signatures[0]!)
           : await nft.mintWithVouchersBatch(structs, signatures);
-      await tx.wait(1);
+      const receipt = await tx.wait(1);
+
+      setStatus("Preparing artwork…");
+      const newIds = await prewarmMintedTokens(receipt);
+      if (newIds.length > 0) setMintedId(newIds[newIds.length - 1]!);
 
       setStatus("Success");
-      try {
-        const next = await nftRead().nextTokenId();
-        if (next > 1n) setMintedId(next - 1n);
-      } catch {
-        // artwork is optional
-      }
       await refreshAll();
       await Promise.all([refetchStatus(), refetchVouchers()]);
       toast.success(

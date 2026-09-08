@@ -27,6 +27,7 @@ import {
   nftContract,
   openSeaUrl,
   parseWalletError,
+  prewarmMetadata,
   usdtContract,
   type OwnedNft,
 } from "@/lib/litdex";
@@ -82,6 +83,7 @@ export function NftCard({ nft, compact = false }: { nft: OwnedNft; compact?: boo
   const { data: artwork, isLoading: artLoading } = useNftArtwork(nft.tokenId, artworkVersion);
   const [busy, setBusy] = useState<string | null>(null);
   const [recipient, setRecipient] = useState("");
+  const [updating, setUpdating] = useState(false);
 
   const atMax = nft.level >= MAX_LEVEL;
   const canAfford = levelCost !== undefined && points !== undefined && points >= levelCost;
@@ -89,7 +91,22 @@ export function NftCard({ nft, compact = false }: { nft: OwnedNft; compact?: boo
   const promoteReady =
     gamesRequired !== null && BigInt(nft.gamesAtMaxLevel) >= gamesRequired && atMax;
 
-  async function run(label: string, fn: (signer: ethers.Signer) => Promise<void>, fallback: string) {
+  /** Generate + cache the new artwork server-side before the card reveals it. */
+  async function prewarm(expected: { rarity: number; level: number }) {
+    setUpdating(true);
+    try {
+      await prewarmMetadata(nft.tokenId, expected.rarity, expected.level);
+    } finally {
+      setUpdating(false);
+    }
+  }
+
+  async function run(
+    label: string,
+    fn: (signer: ethers.Signer) => Promise<void>,
+    fallback: string,
+    expected?: { rarity: number; level: number },
+  ) {
     if (!address) return;
     setBusy(label);
     const before = {
@@ -101,6 +118,7 @@ export function NftCard({ nft, compact = false }: { nft: OwnedNft; compact?: boo
     try {
       const signer = await getSigner();
       await fn(signer);
+      if (expected) await prewarm(expected);
       if (label !== "Transfer") await waitForTokenStateChange(nft.tokenId, before);
       await refreshAll();
       toast.success(`${label} complete`);
@@ -122,6 +140,7 @@ export function NftCard({ nft, compact = false }: { nft: OwnedNft; compact?: boo
         await tx.wait();
       },
       "Level up failed, try again.",
+      { rarity: nft.rarity, level: nft.level + 1 },
     );
 
   const handlePromote = () =>
@@ -132,6 +151,7 @@ export function NftCard({ nft, compact = false }: { nft: OwnedNft; compact?: boo
         await tx.wait();
       },
       "Promote failed, try again.",
+      { rarity: Math.min(nft.rarity + 1, 3), level: 1 },
     );
 
   const handleRepair = () =>
@@ -173,7 +193,12 @@ export function NftCard({ nft, compact = false }: { nft: OwnedNft; compact?: boo
   return (
     <div className="flex flex-col gap-4 rounded-[2rem] border border-[#0038FF]/15 bg-[#0038FF]/5 p-6 shadow-xl backdrop-blur-md">
 
-      {artLoading ? (
+      {updating ? (
+        <div className="flex aspect-square w-full flex-col items-center justify-center gap-3 rounded-3xl border-[3px] border-white bg-black/5">
+          <Spinner className="size-8 text-[#0038FF]" />
+          <p className="btn-text text-black/60">Updating…</p>
+        </div>
+      ) : artLoading ? (
         <div className="flex aspect-square w-full items-center justify-center rounded-3xl border-[3px] border-white bg-black/5">
           <Spinner className="size-8 text-[#0038FF]" />
         </div>
@@ -265,7 +290,7 @@ export function NftCard({ nft, compact = false }: { nft: OwnedNft; compact?: boo
       </div>
       )}
 
-      {!compact && isMaxTier(nft) && <PredictGame nft={nft} />}
+      {!compact && isMaxTier(nft) && <PredictGame nft={nft} onPrewarm={prewarm} />}
 
       {!compact && (
       <div className="space-y-2 border-t border-black/10 pt-4">
