@@ -650,7 +650,7 @@ export function MintCard() {
               <button
                 onClick={() => void connect()}
                 disabled={connecting}
-                className="mt-auto w-full rounded-full bg-gradient-to-r from-blue-600 to-violet-600 px-6 py-3.5 font-mono text-[13px] font-bold uppercase tracking-widest text-white shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/25 active:translate-y-0 active:scale-[0.98] disabled:opacity-40 disabled:hover:transform-none"
+                className="w-full rounded-full bg-gradient-to-r from-blue-600 to-violet-600 px-6 py-3.5 font-mono text-[13px] font-bold uppercase tracking-widest text-white shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/25 active:translate-y-0 active:scale-[0.98] disabled:opacity-40 disabled:hover:transform-none"
               >
                 {connecting ? "Connecting…" : "Connect wallet to mint"}
               </button>
