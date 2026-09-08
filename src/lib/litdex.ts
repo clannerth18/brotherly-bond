@@ -221,6 +221,24 @@ export function voucherCategoryId(category: string): number {
   return i >= 0 ? i : 0;
 }
 
+/** Accepts 0-3, "0"-"3" or "Common"/"Rare"/"Epic"/"Legend" (any case). */
+export function parseRarity(value: unknown): number | null {
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return value >= 0 && value <= 3 ? Math.trunc(value) : null;
+  }
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+    if (trimmed === "") return null;
+    if (/^\d+$/.test(trimmed)) {
+      const n = Number(trimmed);
+      return n >= 0 && n <= 3 ? n : null;
+    }
+    const i = RARITY_NAMES.findIndex((r) => r.toLowerCase() === trimmed.toLowerCase());
+    return i >= 0 ? i : null;
+  }
+  return null;
+}
+
 export function discountLabel(discountBps: number) {
   return `${discountBps / 100}%`;
 }
