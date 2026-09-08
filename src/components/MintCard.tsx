@@ -128,6 +128,14 @@ export function MintCard() {
     (v) => v.category.toUpperCase() === "PRIORITY",
   );
   const priorityVoucher = priorityVouchers[0] ?? null;
+  const RARITY_DISPLAY: Record<string, string> = {
+    COMMON: "LitShard",
+    RARE: "LitCore",
+    EPIC: "LitGod",
+  };
+  const rarityLabel = (category: string) =>
+    RARITY_DISPLAY[category.toUpperCase()] ?? category;
+
   const voucherGroups = (() => {
     const map = new Map<string, Voucher[]>();
     for (const v of voucherData?.vouchers ?? []) {
@@ -555,7 +563,7 @@ export function MintCard() {
 
                         <div className="flex min-h-[68px] items-center justify-between gap-2 pl-9">
                           <p className="whitespace-nowrap font-mono text-xs font-bold uppercase tracking-widest text-[var(--mint-text)]">
-                            {category} x {vouchers.length}
+                            {rarityLabel(category)} x {vouchers.length}
                           </p>
                           <div className="flex shrink-0 items-center gap-1 rounded-full border border-[var(--mint-border)] bg-[var(--mint-surface)] p-0.5">
                             <button
