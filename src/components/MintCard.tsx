@@ -456,9 +456,10 @@ export function MintCard() {
         </div>
 
         {/* Right: mint controls */}
-        <div className="flex flex-col gap-5">
+        <div className="flex h-full flex-col gap-5">
           {/* Mint actions — whitelist + public side by side on wide screens */}
-          <div className="grid items-start gap-4 xl:grid-cols-2">
+          <div className="grid flex-1 items-stretch gap-4 xl:grid-cols-2">
+
           {/* Whitelist — always visible. Three states: not connected, eligible, not eligible. */}
           <div className="flex flex-col gap-4 rounded-[2rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm md:p-6">
             {!address ? (
@@ -622,7 +623,7 @@ export function MintCard() {
 
           {/* Not connected */}
           {!address && (
-            <div className="flex flex-col gap-4">
+            <div className="flex h-full flex-col gap-4">
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm transition-shadow duration-300 hover:shadow-md">
                   <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
@@ -649,7 +650,7 @@ export function MintCard() {
               <button
                 onClick={() => void connect()}
                 disabled={connecting}
-                className="w-full rounded-full bg-gradient-to-r from-blue-600 to-violet-600 px-6 py-3.5 font-mono text-[13px] font-bold uppercase tracking-widest text-white shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/25 active:translate-y-0 active:scale-[0.98] disabled:opacity-40 disabled:hover:transform-none"
+                className="mt-auto w-full rounded-full bg-gradient-to-r from-blue-600 to-violet-600 px-6 py-3.5 font-mono text-[13px] font-bold uppercase tracking-widest text-white shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/25 active:translate-y-0 active:scale-[0.98] disabled:opacity-40 disabled:hover:transform-none"
               >
                 {connecting ? "Connecting…" : "Connect wallet to mint"}
               </button>
@@ -658,7 +659,8 @@ export function MintCard() {
 
           {/* Public stage */}
           {address && (
-            <div className="rounded-[2rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm md:p-6">
+            <div className="flex h-full flex-col rounded-[2rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm md:p-6">
+
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div className="space-y-1">
                   <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
@@ -692,7 +694,8 @@ export function MintCard() {
                     : "Not scheduled"}
               </p>
 
-              <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
+              <div className="mt-auto flex flex-wrap items-center justify-between gap-4 pt-5">
+
                 <div className="flex items-center gap-2 rounded-full border border-[var(--mint-border)] bg-[var(--mint-muted)] p-1">
                   <button
                     aria-label="Decrease public mint quantity"
