@@ -659,7 +659,8 @@ export function MintCard() {
 
           {/* Public stage */}
           {address && (
-            <div className="rounded-[2rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm md:p-6">
+            <div className="flex h-full flex-col rounded-[2rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm md:p-6">
+
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div className="space-y-1">
                   <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
