@@ -543,39 +543,39 @@ export function MintCard() {
                     return (
                       <div
                         key={category}
-                        className="relative overflow-hidden rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-muted)] p-4 transition-shadow duration-300 hover:shadow-sm"
+                        className="relative overflow-hidden rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-muted)] p-3 transition-shadow duration-300 hover:shadow-sm"
                       >
                         {/* Diagonal corner discount ribbon — matches the whitelist-eligible gradient */}
-                        <div className="pointer-events-none absolute left-0 top-0 h-[78px] w-[78px] overflow-hidden rounded-tl-2xl">
-                          <span className="absolute left-[-55px] top-[26px] block w-[150px] -rotate-45 bg-gradient-to-r from-blue-600 to-violet-600 py-1 text-center font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-white shadow-[0_1px_3px_rgba(0,0,0,0.18)]">
+                        <div className="pointer-events-none absolute left-0 top-0 size-[60px] overflow-hidden rounded-tl-2xl">
+                          <span className="absolute left-[-46px] top-[17px] block w-[124px] -rotate-45 bg-gradient-to-r from-blue-600 to-violet-600 py-0.5 text-center font-mono text-[10px] font-bold uppercase tracking-[0.1em] text-white shadow-[0_1px_3px_rgba(0,0,0,0.18)]">
                             {discountLabel(first.discountBps)}
-                            <span className="block text-[8px] leading-none">off</span>
+                            <span className="block text-[7px] leading-none">off</span>
                           </span>
                         </div>
 
-                        <div className="flex min-h-[84px] items-center justify-between gap-3 pl-14">
-                          <p className="truncate font-mono text-sm font-bold uppercase tracking-widest text-[var(--mint-text)]">
+                        <div className="flex min-h-[68px] items-center justify-between gap-2 pl-9">
+                          <p className="whitespace-nowrap font-mono text-xs font-bold uppercase tracking-widest text-[var(--mint-text)]">
                             {category} x {vouchers.length}
                           </p>
-                          <div className="flex shrink-0 items-center gap-1 rounded-full border border-[var(--mint-border)] bg-[var(--mint-surface)] p-1">
+                          <div className="flex shrink-0 items-center gap-1 rounded-full border border-[var(--mint-border)] bg-[var(--mint-surface)] p-0.5">
                             <button
                               aria-label={`Decrease ${category} quantity`}
                               disabled={qty <= 0 || busy}
                               onClick={() => setQty(category, qty - 1, vouchers.length)}
-                              className="grid size-7 place-items-center rounded-full text-[var(--mint-text)] transition-all hover:bg-[var(--mint-muted)] hover:text-[var(--mint-primary)] active:scale-90 disabled:opacity-40"
+                              className="grid size-6 place-items-center rounded-full text-[var(--mint-text)] transition-all hover:bg-[var(--mint-muted)] hover:text-[var(--mint-primary)] active:scale-90 disabled:opacity-40"
                             >
-                              <Minus className="size-3" />
+                              <Minus className="size-2.5" />
                             </button>
-                            <span className="min-w-5 text-center font-mono text-xs font-bold text-[var(--mint-text)]">
+                            <span className="min-w-4 text-center font-mono text-[11px] font-bold text-[var(--mint-text)]">
                               {qty}
                             </span>
                             <button
                               aria-label={`Increase ${category} quantity`}
                               disabled={qty >= vouchers.length || busy}
                               onClick={() => setQty(category, qty + 1, vouchers.length)}
-                              className="grid size-7 place-items-center rounded-full text-[var(--mint-text)] transition-all hover:bg-[var(--mint-muted)] hover:text-[var(--mint-primary)] active:scale-90 disabled:opacity-40"
+                              className="grid size-6 place-items-center rounded-full text-[var(--mint-text)] transition-all hover:bg-[var(--mint-muted)] hover:text-[var(--mint-primary)] active:scale-90 disabled:opacity-40"
                             >
-                              <Plus className="size-3" />
+                              <Plus className="size-2.5" />
                             </button>
                           </div>
                         </div>
