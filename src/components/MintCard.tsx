@@ -406,7 +406,7 @@ export function MintCard() {
         </div>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
         {/* Left: pass-card carousel */}
         <div className="relative flex flex-col gap-4 lg:sticky lg:top-8 lg:self-start">
           <div className="relative aspect-square w-full overflow-hidden rounded-[2rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] shadow-xl">
