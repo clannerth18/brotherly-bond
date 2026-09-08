@@ -374,7 +374,7 @@ export function MintCard() {
     <div
       id="mint"
       style={mintStyle}
-      className="scroll-mt-24 rounded-[2.5rem] border border-[var(--mint-border)] bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-6 shadow-2xl md:p-10"
+      className="scroll-mt-24 rounded-[2.5rem] border border-[var(--mint-border)] bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-5 shadow-2xl md:p-8"
     >
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
