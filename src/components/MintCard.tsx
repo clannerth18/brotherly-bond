@@ -456,9 +456,10 @@ export function MintCard() {
         </div>
 
         {/* Right: mint controls */}
-        <div className="flex flex-col gap-5">
+        <div className="flex h-full flex-col gap-5">
           {/* Mint actions — whitelist + public side by side on wide screens */}
-          <div className="grid items-start gap-4 xl:grid-cols-2">
+          <div className="grid flex-1 items-stretch gap-4 xl:grid-cols-2">
+
           {/* Whitelist — always visible. Three states: not connected, eligible, not eligible. */}
           <div className="flex flex-col gap-4 rounded-[2rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm md:p-6">
             {!address ? (
