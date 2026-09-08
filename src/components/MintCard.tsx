@@ -463,14 +463,37 @@ export function MintCard() {
               {/* Whitelist */}
               {voucherData && voucherData.totalVouchers > 0 && (
                 <div className="flex flex-col gap-4 rounded-[2rem] border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm md:p-6">
-              <div className="min-w-0">
-                <span className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-blue-600 to-violet-600 px-4 py-1.5 font-mono text-[11px] font-bold uppercase tracking-widest text-white shadow-sm">
-                  Whitelist eligible
-                </span>
-                <p className="mt-2 font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
-                  {voucherData.totalVouchers} discounted mint
-                  {voucherData.totalVouchers === 1 ? "" : "s"} available
-                </p>
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <span className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-blue-600 to-violet-600 px-4 py-1.5 font-mono text-[11px] font-bold uppercase tracking-widest text-white shadow-sm">
+                    Whitelist eligible
+                  </span>
+                  <p className="mt-2 font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
+                    {voucherData.totalVouchers} discounted mint
+                    {voucherData.totalVouchers === 1 ? "" : "s"} available
+                  </p>
+                </div>
+                <div className="flex flex-col items-end gap-1">
+                  <div className="flex items-center gap-2 rounded-full border border-[var(--mint-border)] bg-[var(--mint-muted)] px-3 py-1.5">
+                    <span
+                      className={`size-2 rounded-full ${
+                        whitelistActive
+                          ? "bg-[var(--mint-primary)]"
+                          : "bg-[var(--mint-success)]"
+                      }`}
+                    />
+                    <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text)]">
+                      {whitelistActive ? "Minting now" : "Not started"}
+                    </span>
+                  </div>
+                  {!whitelistActive && (
+                    <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
+                      {whitelistCountdown
+                        ? `Starts in ${whitelistCountdown}`
+                        : "Not scheduled"}
+                    </p>
+                  )}
+                </div>
               </div>
 
 
