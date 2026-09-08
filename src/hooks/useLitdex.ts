@@ -10,6 +10,7 @@ import {
   CONFIG_REPAIR_COST,
   artworkUrl,
   nftContract,
+  parseRarity,
   pointsContract,
   usdtContract,
   type OwnedNft,
