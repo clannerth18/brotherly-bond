@@ -27,6 +27,7 @@ import {
   nftContract,
   openSeaUrl,
   parseWalletError,
+  prewarmMetadata,
   usdtContract,
   type OwnedNft,
 } from "@/lib/litdex";
