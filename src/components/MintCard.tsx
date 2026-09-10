@@ -10,6 +10,7 @@ import {
   useNftArtwork,
   useRefreshAll,
   useVouchers,
+  useWhitelistWindow,
 } from "@/hooks/useLitdex";
 import { useWallet } from "@/hooks/useWallet";
 import { PASS_CARD_IMAGES } from "@/lib/images";
@@ -65,6 +66,7 @@ export function MintCard() {
   const { address, getSigner, correctNetwork, connect, connecting } = useWallet();
   const { data: mintStatus, isLoading, refetch: refetchStatus } = useMintStatus();
   const { data: voucherData, isLoading: vouchersLoading, refetch: refetchVouchers } = useVouchers();
+  const { data: whitelistWindow } = useWhitelistWindow();
   const refreshAll = useRefreshAll();
   const [status, setStatus] = useState<string | null>(null);
   const [mintedId, setMintedId] = useState<bigint | null>(null);
@@ -114,8 +116,15 @@ export function MintCard() {
       ? (mintStatus.totalMinted / mintStatus.supplyCap) * 100
       : 0;
 
-  const whitelistActive = voucherData?.whitelistActive !== false;
-  const whitelistStartRaw = Number(voucherData?.whitelistStart ?? 0);
+  // Whitelist window timing is a global on-chain fact, not wallet-specific:
+  // fall back to the wallet-independent status when no wallet is connected.
+  // Tri-state: undefined while the status hasn't loaded yet.
+  const whitelistActiveRaw =
+    voucherData?.whitelistActive ?? whitelistWindow?.whitelistActive;
+  const whitelistActive = whitelistActiveRaw === true;
+  const whitelistStartRaw = Number(
+    voucherData?.whitelistStart ?? whitelistWindow?.whitelistStart ?? 0,
+  );
   const whitelistStartMs =
     whitelistStartRaw > 0
       ? whitelistStartRaw > 1e12
