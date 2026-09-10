@@ -57,7 +57,7 @@ function RoadmapPage() {
           <div className="space-y-8">
             {MILESTONES.map((milestone) => (
               <div key={milestone.quarter} className="relative grid grid-cols-[24px_minmax(0,1fr)] gap-4">
-                <StationMarker current={milestone.current} mobile />
+                <StationMarker current={milestone.current === true} mobile />
                 <MilestoneCard milestone={milestone} />
               </div>
             ))}
@@ -73,7 +73,7 @@ function RoadmapPage() {
               <div key={milestone.quarter} className="relative grid grid-rows-2 px-3">
                 {above && <div className="flex items-end pb-14"><MilestoneCard milestone={milestone} /></div>}
                 <div className={`absolute left-1/2 w-px -translate-x-1/2 bg-black/20 ${above ? "bottom-1/2 h-10" : "top-1/2 h-10"}`} />
-                <StationMarker current={milestone.current} />
+                <StationMarker current={milestone.current === true} />
                 {!above && <div className="row-start-2 flex items-start pt-14"><MilestoneCard milestone={milestone} /></div>}
               </div>
             );
