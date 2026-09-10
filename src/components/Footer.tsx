@@ -23,8 +23,8 @@ const SOCIALS = [
 
 export function Footer() {
   return (
-    <footer className="bg-background text-foreground">
-      <div className="mx-auto max-w-[1600px] px-6 py-12 md:px-12 lg:px-16">
+    <footer className="bg-white text-foreground">
+      <div className="mx-auto max-w-[calc(100%-2rem)] rounded-t-[2.5rem] bg-background px-6 py-12 sm:max-w-[calc(100%-3rem)] md:rounded-t-[4rem] md:px-12 lg:max-w-[calc(100%-6rem)] lg:px-16">
         <div className="flex flex-col items-center border-b border-foreground/20 pb-10 text-center">
           <Link to="/" aria-label="LitDEX Genesis Champions home" className="inline-flex">
             <img
@@ -43,8 +43,11 @@ export function Footer() {
             >
               Whitepaper
             </a>
+            <Link to="/roadmap" className="btn-text transition-colors hover:text-primary">
+              Roadmap
+            </Link>
             <Link to="/about" className="btn-text transition-colors hover:text-primary">
-              About
+              About Us
             </Link>
             <Link to="/contact" className="btn-text transition-colors hover:text-primary">
               Contact Us
