@@ -23,12 +23,12 @@ const SOCIALS = [
 
 export function Footer() {
   return (
-    <footer className="text-foreground">
-      <div className="relative mx-auto max-w-[calc(100%-2rem)] rounded-t-[2.5rem] bg-[#0038FF] px-6 py-8 sm:max-w-[calc(100%-3rem)] md:rounded-t-[4rem] md:px-12 lg:max-w-[calc(100%-6rem)] lg:px-16">
-        <div
-          className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:4rem_4rem]"
-          aria-hidden="true"
-        />
+    <footer className="relative bg-[#0038FF] text-foreground">
+      <div
+        className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:4rem_4rem]"
+        aria-hidden="true"
+      />
+      <div className="relative z-10 mx-auto max-w-[calc(100%-2rem)] rounded-t-[2.5rem] px-6 py-8 sm:max-w-[calc(100%-3rem)] md:rounded-t-[4rem] md:px-12 lg:max-w-[calc(100%-6rem)] lg:px-16">
 
         <div className="relative z-10 flex flex-col items-center text-center">
           <Link to="/" aria-label="LitDEX Genesis Champions home" className="inline-flex">
