@@ -108,7 +108,10 @@ export function useWhitelistWindow() {
     queryKey: ["whitelistWindow"],
     refetchInterval: 30000,
     retry: false,
-    queryFn: async (): Promise<Pick<VoucherResponse, "whitelistActive" | "whitelistStart">> => {
+    queryFn: async (): Promise<{
+      whitelistActive: boolean | undefined;
+      whitelistStart: number | string | undefined;
+    }> => {
       const res = await fetch(
         `${API_BASE}/whitelist/vouchers/0x0000000000000000000000000000000000000000`,
       );
