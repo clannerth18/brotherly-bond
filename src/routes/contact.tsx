@@ -29,8 +29,8 @@ function ContactPage() {
             <span className="btn-label">X / Twitter</span>
           </a>
         </div>
-        <Link to="/" className="btn-text mt-10 inline-block text-black/60 transition-colors hover:text-[#0038FF]">
-          Back to mint
+        <Link to="/" className="btn fx-9 btn-pill btn-blue mt-10 inline-flex">
+          <span className="btn-label">Back to mint</span>
         </Link>
       </div>
     </main>

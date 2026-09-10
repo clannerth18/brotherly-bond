@@ -79,8 +79,8 @@ function RoadmapPage() {
           })}
         </div>
 
-        <Link to="/" className="mt-10 inline-flex rounded-full bg-gradient-to-r from-blue-600 to-violet-600 px-7 py-3 font-mono text-[12px] font-bold uppercase tracking-widest text-white shadow-lg transition-transform hover:-translate-y-0.5">
-          Back to mint
+        <Link to="/" className="btn fx-9 btn-pill btn-blue mt-10 inline-flex">
+          <span className="btn-label">Back to mint</span>
         </Link>
       </section>
     </main>
