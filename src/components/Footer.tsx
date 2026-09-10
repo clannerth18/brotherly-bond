@@ -23,9 +23,14 @@ const SOCIALS = [
 
 export function Footer() {
   return (
-    <footer className="bg-white text-foreground">
-      <div className="mx-auto max-w-[calc(100%-2rem)] rounded-t-[2.5rem] bg-background px-6 py-12 sm:max-w-[calc(100%-3rem)] md:rounded-t-[4rem] md:px-12 lg:max-w-[calc(100%-6rem)] lg:px-16">
-        <div className="flex flex-col items-center border-b border-foreground/20 pb-10 text-center">
+    <footer className="bg-[#0038FF] text-foreground">
+      <div className="relative mx-auto max-w-[calc(100%-2rem)] overflow-hidden rounded-t-[2.5rem] bg-[#0038FF] px-6 py-12 sm:max-w-[calc(100%-3rem)] md:rounded-t-[4rem] md:px-12 lg:max-w-[calc(100%-6rem)] lg:px-16">
+        <div
+          className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:4rem_4rem]"
+          aria-hidden="true"
+        />
+
+        <div className="relative z-10 flex flex-col items-center border-b border-foreground/20 pb-10 text-center">
           <Link to="/" aria-label="LitDEX Genesis Champions home" className="inline-flex">
             <img
               src="/favicon-512x512.png"
@@ -74,7 +79,7 @@ export function Footer() {
           </div>
         </div>
 
-        <p className="btn-text pt-7 text-center text-foreground/65">
+        <p className="relative z-10 btn-text pt-7 text-center text-foreground/65">
           © 2026 LitDEX Network. All rights reserved.
         </p>
       </div>
