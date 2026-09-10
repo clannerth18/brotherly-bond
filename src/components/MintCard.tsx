@@ -118,10 +118,9 @@ export function MintCard() {
 
   // Whitelist window timing is a global on-chain fact, not wallet-specific:
   // fall back to the wallet-independent status when no wallet is connected.
-  // Tri-state: undefined while the status hasn't loaded yet.
-  const whitelistActiveRaw =
-    voucherData?.whitelistActive ?? whitelistWindow?.whitelistActive;
-  const whitelistActive = whitelistActiveRaw === true;
+  const whitelistStatusLoaded = !!(voucherData ?? whitelistWindow);
+  const whitelistActive =
+    (voucherData?.whitelistActive ?? whitelistWindow?.whitelistActive) !== false;
   const whitelistStartRaw = Number(
     voucherData?.whitelistStart ?? whitelistWindow?.whitelistStart ?? 0,
   );
