@@ -659,9 +659,12 @@ export function MintCard() {
                   <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--mint-text-muted)]">
                     Whitelist mint
                   </p>
-                  <p className="mt-2 flex items-center gap-2 font-mono text-[12px] font-bold uppercase tracking-widest text-[var(--mint-primary)]">
-                    <span className="inline-block size-2 rounded-full bg-[var(--mint-success)]" />
-                    Open
+                  <p className="mt-2 font-mono text-[12px] font-bold uppercase tracking-widest text-[var(--mint-text)]">
+                    {whitelistActive
+                      ? "Open"
+                      : whitelistCountdown
+                        ? `Starts in ${whitelistCountdown}`
+                        : "Not scheduled"}
                   </p>
                 </div>
                 <div className="rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm transition-shadow duration-300 hover:shadow-md">
