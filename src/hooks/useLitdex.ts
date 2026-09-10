@@ -98,6 +98,27 @@ export function useVouchers() {
   });
 }
 
+/**
+ * Wallet-independent whitelist window status (whitelistActive / whitelistStart).
+ * Hits the same vouchers endpoint with the zero address so the whitelist
+ * countdown is visible before any wallet is connected.
+ */
+export function useWhitelistWindow() {
+  return useQuery({
+    queryKey: ["whitelistWindow"],
+    refetchInterval: 30000,
+    retry: false,
+    queryFn: async (): Promise<Pick<VoucherResponse, "whitelistActive" | "whitelistStart">> => {
+      const res = await fetch(
+        `${API_BASE}/whitelist/vouchers/0x0000000000000000000000000000000000000000`,
+      );
+      const json = (await res.json()) as VoucherResponse & { error?: string };
+      if (!res.ok || json.error) throw new Error(json.error ?? "whitelist status failed");
+      return { whitelistActive: json.whitelistActive, whitelistStart: json.whitelistStart };
+    },
+  });
+}
+
 export function useGameConfig() {
   return useQuery({
     queryKey: ["gameConfig"],
