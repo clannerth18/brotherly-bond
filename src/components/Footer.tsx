@@ -39,7 +39,7 @@ export function Footer() {
             />
           </Link>
 
-          <nav aria-label="Footer navigation" className="mt-5 flex flex-wrap justify-center gap-x-8 gap-y-3 md:gap-x-10">
+          <nav aria-label="Footer navigation" className="mt-5 flex w-full max-w-5xl flex-wrap justify-between gap-x-4 gap-y-3">
             <a
               href={WHITEPAPER_URL}
               target="_blank"
