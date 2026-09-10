@@ -1,4 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
+import { TrainFront } from "lucide-react";
 
 const MILESTONES = [
   {
@@ -51,12 +52,12 @@ function RoadmapPage() {
         <span className="mt-4 block h-1 w-16 rounded-full bg-gradient-to-r from-blue-600 to-violet-600" />
 
         <div className="relative mt-12 md:hidden">
-          <div className="absolute bottom-4 left-[11px] top-4 w-px bg-black/15" />
-          <div className="absolute left-[11px] top-4 h-12 w-px bg-gradient-to-b from-blue-600 to-violet-600" />
+          <div className="railway-track-v absolute bottom-4 left-0 top-4 w-6" aria-hidden="true" />
+          <div className="railway-progress-v absolute left-0 top-4 h-8 w-6" aria-hidden="true" />
           <div className="space-y-8">
             {MILESTONES.map((milestone) => (
               <div key={milestone.quarter} className="relative grid grid-cols-[24px_minmax(0,1fr)] gap-4">
-                <span className={`relative z-10 mt-6 block rounded-full border-2 ${milestone.current ? "size-6 border-white bg-gradient-to-br from-blue-600 to-violet-600 shadow-[0_0_18px_rgba(79,70,229,0.55)]" : "ml-1 size-4 border-black/25 bg-white"}`} />
+                <StationMarker current={milestone.current} mobile />
                 <MilestoneCard milestone={milestone} />
               </div>
             ))}
@@ -64,15 +65,15 @@ function RoadmapPage() {
         </div>
 
         <div className="relative mt-16 hidden min-h-[540px] grid-cols-4 md:grid">
-          <div className="absolute left-[12.5%] right-[12.5%] top-1/2 h-0.5 -translate-y-1/2 bg-black/15" />
-          <div className="absolute left-[12.5%] top-1/2 h-0.5 w-0 -translate-y-1/2 bg-gradient-to-r from-blue-600 to-violet-600" />
+          <div className="railway-track-h absolute inset-x-0 top-1/2 h-6 -translate-y-1/2" aria-hidden="true" />
+          <div className="railway-progress-h absolute left-0 top-1/2 h-6 w-[12.5%] -translate-y-1/2" aria-hidden="true" />
           {MILESTONES.map((milestone, index) => {
             const above = index % 2 === 0;
             return (
               <div key={milestone.quarter} className="relative grid grid-rows-2 px-3">
                 {above && <div className="flex items-end pb-14"><MilestoneCard milestone={milestone} /></div>}
                 <div className={`absolute left-1/2 w-px -translate-x-1/2 bg-black/20 ${above ? "bottom-1/2 h-10" : "top-1/2 h-10"}`} />
-                <span className={`absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 ${milestone.current ? "size-7 border-white bg-gradient-to-br from-blue-600 to-violet-600 shadow-[0_0_20px_rgba(79,70,229,0.6)]" : "size-5 border-black/25 bg-white"}`} />
+                <StationMarker current={milestone.current} />
                 {!above && <div className="row-start-2 flex items-start pt-14"><MilestoneCard milestone={milestone} /></div>}
               </div>
             );
@@ -84,6 +85,26 @@ function RoadmapPage() {
         </Link>
       </section>
     </main>
+  );
+}
+
+function StationMarker({ current, mobile = false }: { current?: boolean; mobile?: boolean }) {
+  if (current) {
+    return (
+      <span
+        className={`${mobile ? "relative mt-4" : "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"} railway-train z-20 flex size-9 items-center justify-center rounded-full border-2 border-white bg-gradient-to-br from-blue-600 to-violet-600 text-white shadow-[0_0_20px_rgba(79,70,229,0.6)]`}
+        aria-label="Current station"
+      >
+        <TrainFront className="size-5" strokeWidth={2} aria-hidden="true" />
+      </span>
+    );
+  }
+
+  return (
+    <span
+      className={`${mobile ? "relative z-10 ml-0.5 mt-6" : "absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2"} block size-5 rounded-full border-[3px] border-black/25 bg-white shadow-[0_0_0_3px_rgba(255,255,255,0.85)]`}
+      aria-hidden="true"
+    />
   );
 }
 
