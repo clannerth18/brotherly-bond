@@ -23,37 +23,38 @@ const SOCIALS = [
 
 export function Footer() {
   return (
-    <footer className="bg-card text-card-foreground">
+    <footer className="bg-background text-foreground">
       <div className="mx-auto max-w-[1600px] px-6 py-12 md:px-12 lg:px-16">
-        <div className="flex flex-col gap-10 border-b border-card-foreground/15 pb-10 md:flex-row md:items-end md:justify-between">
-          <div>
-            <Link to="/" aria-label="LitDEX Genesis Champions home" className="inline-flex items-center font-display text-xl uppercase">
-              <span className="rounded-md bg-primary px-2 py-1 text-primary-foreground">LIT</span>
-              <span className="ml-1 rounded-md border border-card-foreground/30 px-2 py-1">DEX</span>
+        <div className="flex flex-col items-center border-b border-foreground/20 pb-10 text-center">
+          <Link to="/" aria-label="LitDEX Genesis Champions home" className="inline-flex">
+            <img
+              src="/favicon-512x512.png"
+              alt="LitDEX"
+              className="size-14 rounded-xl object-contain shadow-sm md:size-16"
+            />
+          </Link>
+
+          <nav aria-label="Footer navigation" className="mt-7 flex flex-wrap justify-center gap-x-6 gap-y-4">
+            <a
+              href={WHITEPAPER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-text transition-colors hover:text-primary"
+            >
+              Whitepaper
+            </a>
+            <Link to="/about" className="btn-text transition-colors hover:text-primary">
+              About
             </Link>
+            <Link to="/contact" className="btn-text transition-colors hover:text-primary">
+              Contact Us
+            </Link>
+            <Link to="/faq" className="btn-text transition-colors hover:text-primary">
+              FAQ
+            </Link>
+          </nav>
 
-            <nav aria-label="Footer navigation" className="mt-7 flex flex-wrap gap-x-6 gap-y-4">
-              <a
-                href={WHITEPAPER_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-text transition-colors hover:text-primary"
-              >
-                Whitepaper
-              </a>
-              <Link to="/about" className="btn-text transition-colors hover:text-primary">
-                About
-              </Link>
-              <Link to="/contact" className="btn-text transition-colors hover:text-primary">
-                Contact Us
-              </Link>
-              <Link to="/faq" className="btn-text transition-colors hover:text-primary">
-                FAQ
-              </Link>
-            </nav>
-          </div>
-
-          <div className="flex items-center gap-3">
+          <div className="mt-7 flex items-center justify-center gap-3">
             {SOCIALS.map((social) => (
               <a
                 key={social.name}
@@ -62,7 +63,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 aria-label={social.name}
                 title={social.name}
-                className="flex size-11 items-center justify-center rounded-full border border-card-foreground/25 transition-colors hover:border-primary hover:bg-primary/10"
+                className="flex size-11 items-center justify-center rounded-full border border-foreground/35 transition-colors hover:border-primary hover:bg-primary/10"
               >
                 <img src={social.icon} alt="" className="size-5 object-contain" loading="lazy" />
               </a>
@@ -70,7 +71,7 @@ export function Footer() {
           </div>
         </div>
 
-        <p className="btn-text pt-7 text-card-foreground/55">
+        <p className="btn-text pt-7 text-center text-foreground/65">
           © 2026 LitDEX Network. All rights reserved.
         </p>
       </div>
