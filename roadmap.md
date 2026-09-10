@@ -8,3 +8,4 @@
 - [x] Add the responsive Roadmap timeline.
 - [x] Replace About and FAQ placeholders with final supplied content.
 - [x] Verify the new pages and footer on desktop and mobile.
+- [x] Update champion identifiers and polish the footer background, divider, and social spacing.
