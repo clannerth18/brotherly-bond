@@ -186,6 +186,70 @@
   }
 }
 
+/* Minimal railway treatment for the roadmap timeline. */
+.railway-track-h,
+.railway-progress-h {
+  background-image:
+    linear-gradient(to bottom, transparent 5px, currentColor 5px 7px, transparent 7px 17px, currentColor 17px 19px, transparent 19px),
+    repeating-linear-gradient(to right, transparent 0 10px, currentColor 10px 12px, transparent 12px 24px);
+}
+
+.railway-track-v,
+.railway-progress-v {
+  background-image:
+    linear-gradient(to right, transparent 5px, currentColor 5px 7px, transparent 7px 17px, currentColor 17px 19px, transparent 19px),
+    repeating-linear-gradient(to bottom, transparent 0 10px, currentColor 10px 12px, transparent 12px 24px);
+}
+
+.railway-track-h,
+.railway-track-v {
+  color: rgb(0 0 0 / 15%);
+}
+
+.railway-progress-h,
+.railway-progress-v {
+  color: transparent;
+  background-color: transparent;
+  background-image: none;
+}
+
+.railway-progress-h::before,
+.railway-progress-v::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(135deg, rgb(37 99 235), rgb(124 58 237));
+}
+
+.railway-progress-h::before {
+  mask-image:
+    linear-gradient(to bottom, transparent 5px, black 5px 7px, transparent 7px 17px, black 17px 19px, transparent 19px),
+    repeating-linear-gradient(to right, transparent 0 10px, black 10px 12px, transparent 12px 24px);
+  mask-composite: add;
+}
+
+.railway-progress-v::before {
+  mask-image:
+    linear-gradient(to right, transparent 5px, black 5px 7px, transparent 7px 17px, black 17px 19px, transparent 19px),
+    repeating-linear-gradient(to bottom, transparent 0 10px, black 10px 12px, transparent 12px 24px);
+  mask-composite: add;
+}
+
+@keyframes railway-train-idle {
+  0%, 100% { margin-left: -2px; }
+  50% { margin-left: 2px; }
+}
+
+.railway-train {
+  animation: railway-train-idle 3.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .railway-train {
+    animation: none;
+  }
+}
+
 /* Hero nav links: white outline that turns black-on-white on hover */
 .btn-ghost.nav-link {
   --bink: #ffffff;
