@@ -668,11 +668,13 @@ export function MintCard() {
                     Whitelist mint
                   </p>
                   <p className="mt-2 font-mono text-[12px] font-bold uppercase tracking-widest text-[var(--mint-text)]">
-                    {whitelistActive
-                      ? "Open"
-                      : whitelistCountdown
-                        ? `Starts in ${whitelistCountdown}`
-                        : "Not scheduled"}
+                    {!whitelistStatusLoaded
+                      ? "…"
+                      : whitelistActive
+                        ? "Open"
+                        : whitelistCountdown
+                          ? `Starts in ${whitelistCountdown}`
+                          : "Not scheduled"}
                   </p>
                 </div>
                 <div className="rounded-2xl border border-[var(--mint-border)] bg-[var(--mint-surface)] p-5 shadow-sm transition-shadow duration-300 hover:shadow-md">
