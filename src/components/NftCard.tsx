@@ -221,7 +221,7 @@ export function NftCard({ nft, compact = false }: { nft: OwnedNft; compact?: boo
             className="size-12 object-contain"
           />
           <div>
-            <p className="btn-text text-black/50">#{nft.tokenId.toString().padStart(4, "0")}</p>
+            <p className="btn-text text-black/50">CHAMPION #{nft.tokenId.toString()}</p>
             <p className="btn-text text-black">{formatTierLabel(nft).toUpperCase()}</p>
           </div>
 
